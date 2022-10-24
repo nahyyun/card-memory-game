@@ -39,9 +39,9 @@ export default class Game {
         $('.card-container').addEventListener('click', this.cardClickHandler);
     }
 
-    startBtnClickHandler = async(e) => {
+    startBtnClickHandler = (e) => {
         e.target.disabled = true;
-        await this.startGame();
+        this.startGame();
     }
 
     cardClickHandler = async(e) => {
@@ -94,10 +94,11 @@ export default class Game {
         return location.reload();
     }
 
-    async flipCardToFront (card) {
+    flipCardToFront (card) {
         this.cardList[card.dataset.idx].isOpen = true;
         this.clicked.push(card);
-        await showFrontAnimation(card);
+
+        return showFrontAnimation(card);
     }
 
     async flipCardToBack () {
@@ -109,10 +110,9 @@ export default class Game {
         this.clicked = [];
     }
 
-    async play () {
+    play () {
         if (!isMatched(this.clicked)) {
-            await this.flipCardToBack();
-            return;
+            return this.flipCardToBack();
         }
         this.score += 1;
 

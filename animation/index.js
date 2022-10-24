@@ -29,23 +29,23 @@ function animate(target, keyframes, option){
     )
 }
 
-export async function showFrontBackAnimation(cards) {
+export function showFrontBackAnimation(cards) {
     let animation = [];
     
     cards.forEach(card => 
         animation.push(animate(card, [show, hide], flipAlterOption))
     )
-    return await Promise.all(animation)
+    return Promise.all(animation)
 }
 
-export async function showFrontAnimation(card){
-    return await Promise.all([
+export function showFrontAnimation(card){
+    return Promise.all([
         animate(card, [show, hide], flipOption)
     ])
 }
 
-export async function showBackAnimation(card){
-    return await Promise.all(
+export function showBackAnimation(card){
+    return Promise.all(
         card.map(card => animate(card, [hide, show], flipOption))
     )
 }
